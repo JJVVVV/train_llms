@@ -33,9 +33,9 @@ sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fi
 pretrained_model_dir=./baichuan-13b-chat
 # deepspeed_config_file=ds_zero2_no_offload.json
 deepspeed_config_file=./ds_zero3_offload.hjson
-train_batch_size=8
-infer_batch_size=32
-gradient_accumulation_steps=1
+train_batch_size=64
+infer_batch_size=128
+gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
 fp16=True
 bf16=False
