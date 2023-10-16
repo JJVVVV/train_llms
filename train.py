@@ -9,7 +9,7 @@ import torch
 import torch.distributed as dist
 from fire import Fire
 from toolkit import getLogger
-from toolkit.metric import MetricDict, calculate_rouge
+from toolkit.metric import MetricDict, rouge
 from build_dataset import TrainingDataset
 from toolkit.training import Trainer, initialize
 from toolkit.nlp import TextDataset, NLPTrainingConfig
@@ -40,7 +40,7 @@ DEFAULT_UNK_TOKEN = "<unk>"
 
 
 def eval_callback(all_labels, all_logits, mean_loss):
-    return calculate_rouge(all_logits, all_labels, ("rouge1", "rouge2", "rougeL"), "zh")
+    return rouge(all_logits, all_labels, ("rouge1", "rouge2", "rougeL"), "zh")
 
 
 def load_tokenizer() -> PreTrainedTokenizer:
