@@ -19,6 +19,7 @@ wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz
 tar -zxf baichuan-13b-chat.tar.gz
 
 # 定义快捷命令
+echo "export LANG=en_US.UTF-8" >> /root/.bashrc
 echo "alias log='tail -f /root/paddlejob/workspace/env_run/training.log'" >> /root/.bashrc
 echo "alias all_log='more /root/paddlejob/workspace/env_run/training.log'" >> /root/.bashrc
 echo "alias tps='ps aux|grep train.py'" >> /root/.bashrc
@@ -26,6 +27,7 @@ echo "alias ws='cd /root/paddlejob/workspace/env_run/'" >> /root/.bashrc
 echo "alias k9='kill -9'" >> /root/.bashrc
 echo "alias gs='gpustat -cpu'" >> /root/.bashrc
 echo "alias gpu='watch --color -n 1 gpustat -cpu --color'" >> /root/.bashrc
+echo "alias killtrain='bash /root/paddlejob/workspace/env_run/bashScript/killtrain.sh'" >> /root/.bashrc
 
 # 禁止fire输出
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
