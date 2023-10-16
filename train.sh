@@ -41,7 +41,7 @@ gradient_accumulation_steps=4
 fp16=True
 bf16=False
 epochs=5
-opt_lr=1e-4
+opt_lr=2e-4
 opt_weight_decay=0
 sch_warmup_ratio_steps=0.03
 train_file_path=./data/hot_finetune_data/train
@@ -82,7 +82,7 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --sch_warmup_ratio_steps $sch_warmup_ratio_steps \
     --opt_weight_decay $opt_weight_decay \
     --ddp_timeout 30000 \
-    --logging_steps 10 \
+    --logging_steps 5 \
     --padding_side "right" \
     --max_new_tokens $max_new_tokens \
     --temperature $temperature \
