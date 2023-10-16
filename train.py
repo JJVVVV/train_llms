@@ -61,9 +61,9 @@ def load_tokenizer() -> PreTrainedTokenizer:
 
     # * resize embedding
     if tokenizer.pad_token is None:
-        logger.info(f"Adding pad token {DEFAULT_PAD_TOKEN}")
+        logger.debug(f"Adding pad token {DEFAULT_PAD_TOKEN}")
         tokenizer.add_special_tokens(dict(pad_token=DEFAULT_PAD_TOKEN))
-    logger.info(f"len(tokenizer):{len(tokenizer)}")
+    logger.debug(f"len(tokenizer):{len(tokenizer)}")
     if dist.is_initialized():
         dist.barrier()
     return tokenizer
@@ -73,7 +73,7 @@ def load_dataset(tokenizer: PreTrainedTokenizer) -> tuple:
     # * Load training data, development data and test data
     path = Path(config.train_file_path)
     files = [os.path.join(path, file.name) for file in path.glob("*.json")]
-    logger.info(str(files))
+    logger.debug(str(files))
     train_dataset = TrainingDataset(
         Split.TRAINING, config, files, tokenizer, config.max_seq_length, preprocessing_num_workers=config.preprocessing_num_workers
     )
@@ -197,7 +197,8 @@ if __name__ == "__main__":
         str(config.opt_lr),
         str(config.seed),
     )
-    config.save_dir = Path("outputs", _dir)
+    if config.save_dir is None:
+        config.save_dir = Path("outputs", _dir)
     config.save(config.save_dir, silence=False)
 
     # * Create logger
