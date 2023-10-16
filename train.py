@@ -15,13 +15,7 @@ from toolkit.training import Trainer, initialize
 from toolkit.nlp import TextDataset, NLPTrainingConfig
 import os
 
-from transformers import (
-    AutoConfig,
-    AutoTokenizer,
-    AutoModelForCausalLM,
-    PreTrainedTokenizer,
-    CONFIG_MAPPING,
-)
+from transformers import AutoConfig, AutoTokenizer, AutoModelForCausalLM, PreTrainedTokenizer, CONFIG_MAPPING
 
 from transformers.integrations import HfDeepSpeedConfig
 from toolkit.enums import Split
@@ -58,9 +52,7 @@ def load_tokenizer() -> PreTrainedTokenizer:
         "use_auth_token": True if config.use_auth_token else None,
     }
     if config.model_dir:
-        tokenizer = AutoTokenizer.from_pretrained(
-            config.model_dir, **tokenizer_kwargs, trust_remote_code=True
-        )
+        tokenizer = AutoTokenizer.from_pretrained(config.model_dir, **tokenizer_kwargs, trust_remote_code=True)
     else:
         raise ValueError(
             "You are instantiating a new tokenizer from scratch. This is not supported by this script."
@@ -83,29 +75,12 @@ def load_dataset(tokenizer: PreTrainedTokenizer) -> tuple:
     files = [os.path.join(path, file.name) for file in path.glob("*.json")]
     logger.info(str(files))
     train_dataset = TrainingDataset(
-        Split.TRAINING,
-        config,
-        files,
-        tokenizer,
-        config.max_seq_length,
-        preprocessing_num_workers=config.preprocessing_num_workers,
+        Split.TRAINING, config, files, tokenizer, config.max_seq_length, preprocessing_num_workers=config.preprocessing_num_workers
     )
 
-    val_dataset = TextDataset.from_file(
-        config.val_file_path,
-        tokenizer,
-        split=Split.VALIDATION,
-        configs=config,
-        load_data_fn=load_data_fn,
-    )
+    val_dataset = TextDataset.from_file(config.val_file_path, tokenizer, split=Split.VALIDATION, configs=config, load_data_fn=load_data_fn)
 
-    test_dataset = TextDataset.from_file(
-        config.test_file_path,
-        tokenizer,
-        split=Split.TEST,
-        configs=config,
-        load_data_fn=load_data_fn,
-    )
+    test_dataset = TextDataset.from_file(config.test_file_path, tokenizer, split=Split.TEST, configs=config, load_data_fn=load_data_fn)
     if dist.is_initialized():
         dist.barrier()
     return train_dataset, val_dataset, test_dataset
@@ -115,16 +90,16 @@ def load_model(tokenizer):
     # global dschf
     start = time.time()
 
+    # * define model class
+    model_class = AutoModelForCausalLM
+
+    # * define from_pretrained kwargs
+    from_pretrained_kwargs = None
+
     # * Load model config
-    model_kwargs = {
-        "cache_dir": config.cache_dir,
-        "revision": config.model_revision,
-        "use_auth_token": True if config.use_auth_token else None,
-    }
+    model_kwargs = {"cache_dir": config.cache_dir, "revision": config.model_revision, "use_auth_token": True if config.use_auth_token else None}
     if config.model_dir:
-        model_config = AutoConfig.from_pretrained(
-            config.model_dir, **model_kwargs, trust_remote_code=True
-        )
+        model_config = AutoConfig.from_pretrained(config.model_dir, **model_kwargs, trust_remote_code=True)
     else:
         model_config = CONFIG_MAPPING[config.model_type]()
         logger.warning("You are instantiating a new config instance from scratch.")
@@ -134,17 +109,35 @@ def load_model(tokenizer):
             logger.info(f"New config: {config}")
 
     # * Load model
-    logger.debug(f"local_rank {local_rank}: Loading model ...")
-    if config.model_dir:
-        torch_dtype = (
-            config.torch_dtype
-            if config.torch_dtype in ["auto", None]
-            else getattr(torch, config.torch_dtype)
-        )
-        model = AutoModelForCausalLM.from_pretrained(
-            config.model_dir,
+    if config.vocab_size != len(tokenizer):
+        logger.debug(f"local_rank {local_rank}: Loading model ...")
+        if config.model_dir:
+            torch_dtype = config.torch_dtype if config.torch_dtype in ["auto", None] else getattr(torch, config.torch_dtype)
+            model = AutoModelForCausalLM.from_pretrained(
+                config.model_dir,
+                from_tf=bool(".ckpt" in config.model_dir),
+                config=model_config,
+                cache_dir=config.cache_dir,
+                revision=config.model_revision,
+                use_auth_token=True if config.use_auth_token else None,
+                torch_dtype=torch_dtype,
+                low_cpu_mem_usage=False,
+                trust_remote_code=True,
+            )
+        else:
+            model = AutoModelForCausalLM.from_config(config)
+            n_params = sum({p.data_ptr(): p.numel() for p in model.parameters()}.values())
+            logger.debug(f"Training new model from scratch - Total size={n_params/2**20:.2f}M params")
+        embedding_size = model.get_input_embeddings().weight.shape[0]
+        if len(tokenizer) != embedding_size:
+            logger.debug("resize the embedding size by the size of the tokenizer")
+            model.resize_token_embeddings(len(tokenizer))
+    else:
+        logger.debug(f"local_rank {local_rank}: Construct `from_pretrained` kwargs ...")
+        model = None
+        torch_dtype = config.torch_dtype if config.torch_dtype in ["auto", None] else getattr(torch, config.torch_dtype)
+        from_pretrained_kwargs = dict(
             from_tf=bool(".ckpt" in config.model_dir),
-            config=model_config,
             cache_dir=config.cache_dir,
             revision=config.model_revision,
             use_auth_token=True if config.use_auth_token else None,
@@ -152,23 +145,12 @@ def load_model(tokenizer):
             low_cpu_mem_usage=False,
             trust_remote_code=True,
         )
-    else:
-        model = AutoModelForCausalLM.from_config(config)
-        n_params = sum({p.data_ptr(): p.numel() for p in model.parameters()}.values())
-        logger.info(
-            f"Training new model from scratch - Total size={n_params/2**20:.2f}M params"
-        )
-
-    embedding_size = model.get_input_embeddings().weight.shape[0]
-    if len(tokenizer) != embedding_size:
-        logger.info("resize the embedding size by the size of the tokenizer")
-        model.resize_token_embeddings(len(tokenizer))
 
     end = time.time()
 
     logger.debug(f"local_rank {local_rank}: Loading model takes {end - start:.2f} sec.")
 
-    return model
+    return model, model_config, model_class, from_pretrained_kwargs
 
 
 def main() -> None:
@@ -179,7 +161,7 @@ def main() -> None:
     train_dataset, val_dataset, test_dataset = load_dataset(tokenizer)
 
     # *load model
-    model = load_model(tokenizer)
+    model, model_config, model_class, from_pretrained_kwargs = load_model(tokenizer)
 
     # * Train
     trainer = Trainer(
@@ -187,6 +169,9 @@ def main() -> None:
         evaluate_only=False,
         config=config,
         model=model,
+        model_config=model_config,
+        model_class=model_class,
+        from_pretrained_kwargs=from_pretrained_kwargs,
         dataset_train=train_dataset,
         dataset_val=val_dataset,
         dataset_test=test_dataset,
