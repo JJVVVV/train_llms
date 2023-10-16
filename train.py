@@ -149,7 +149,9 @@ def load_model(tokenizer):
     end = time.time()
 
     logger.debug(f"local_rank {local_rank}: Loading model takes {end - start:.2f} sec.")
-
+    # * sync
+    if dist.is_initialized():
+        dist.barrier()
     return model, model_config, model_class, from_pretrained_kwargs
 
 
