@@ -11,6 +11,7 @@
 pip config unset global.index-url
 cd toolkit_pkg && pip install --editable . > ../pip.log 2>&1 && cd -
 pip install transformers_stream_generator
+pip install accelerate
 
 
 # 下载模型

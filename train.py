@@ -109,7 +109,7 @@ def load_model(tokenizer):
             logger.info(f"New config: {config}")
 
     # * Load model
-    if config.vocab_size != len(tokenizer):
+    if model_config.vocab_size != len(tokenizer):
         logger.debug(f"local_rank {local_rank}: Loading model ...")
         if config.model_dir:
             torch_dtype = config.torch_dtype if config.torch_dtype in ["auto", None] else getattr(torch, config.torch_dtype)
