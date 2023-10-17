@@ -1,3 +1,4 @@
+import os
 import time
 from pathlib import Path
 
@@ -7,19 +8,17 @@ import numpy as np
 import toolkit
 import torch
 import torch.distributed as dist
-from fire import Fire
-from toolkit import getLogger
-from toolkit.metric import MetricDict, rouge
 from build_dataset import TrainingDataset
-from toolkit.training import Trainer, initialize
-from toolkit.nlp import TextDataset, NLPTrainingConfig
-import os
-
-from transformers import AutoConfig, AutoTokenizer, AutoModelForCausalLM, PreTrainedTokenizer, CONFIG_MAPPING
-
-from transformers.integrations import HfDeepSpeedConfig
-from toolkit.enums import Split
+from extral_evaluator import Extral_Evaluator, extra_calculate_metric_callback
+from fire import Fire
 from load_data_fn import load_data_fn
+from toolkit import getLogger
+from toolkit.enums import Split
+from toolkit.metric import MetricDict, bleu, rouge
+from toolkit.nlp import NLPTrainingConfig, TextDataset
+from toolkit.training import Trainer, initialize
+from transformers import CONFIG_MAPPING, AutoConfig, AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer
+from transformers.integrations import HfDeepSpeedConfig
 
 IGNORE_INDEX = -100
 DEFAULT_PAD_TOKEN = "[PAD]"
@@ -28,19 +27,11 @@ DEFAULT_EOS_TOKEN = "</s>"
 DEFAULT_BOS_TOKEN = "<s>"
 DEFAULT_UNK_TOKEN = "<unk>"
 
-# todo
-# next line instructs transformers to partition the model directly over multiple gpus using
-# deepspeed.zero.Init when model's `from_pretrained` method is called.
-#
-# **it has to be run before loading the model AutoModelForSeq2SeqLM.from_pretrained(model_name)**
-#
-# otherwise the model will first be loaded normally and only partitioned at forward time which is
-# less efficient and when there is little CPU RAM may fail
-# dschf = HfDeepSpeedConfig(ds_config)
-
 
 def eval_callback(all_labels, all_logits, mean_loss):
-    return rouge(all_logits, all_labels, ("rouge1", "rouge2", "rougeL"), "zh")
+    metric = rouge(all_logits, all_labels, "zh", ("rouge1", "rouge2", "rougeL"))
+    metric.update(bleu(all_logits, all_labels, "zh", ("bleu1", "bleu2", "bleu3", "bleu4")))
+    return metric
 
 
 def load_tokenizer() -> PreTrainedTokenizer:
@@ -179,6 +170,7 @@ def main() -> None:
         dataset_test=test_dataset,
         calculate_metric_callback=eval_callback,
         tokenizer=tokenizer,
+        extral_evaluators=[(Extral_Evaluator, extra_calculate_metric_callback)],
     )
     trainer.train()
 

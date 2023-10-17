@@ -46,7 +46,7 @@ pretrained_model_dir=./baichuan-13b-chat
 # deepspeed_config_file=ds_zero2_no_offload.json
 deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
-infer_batch_size=128
+infer_batch_size=64
 gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
 fp16=True
@@ -103,6 +103,8 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --num_beams $num_beams \
     --repetition_penalty $repetition_penalty \
     --save_dir "outputs" \
+    --generate_config_file "generate_config.json" \
+    --re_gen_num 2 \
     > training.log 2>&1
 
     # --train_micro_batch_size_per_gpu ${train_micro_batch_size_per_gpu} \
