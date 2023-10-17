@@ -12,6 +12,8 @@ pip config unset global.index-url
 cd toolkit_pkg && pip install --editable . > ../pip.log 2>&1 && cd -
 pip install transformers_stream_generator
 pip install accelerate
+pip install nltk
+
 
 
 # 下载模型
@@ -30,6 +32,11 @@ echo "alias gs='gpustat -cpu'" >> /root/.bashrc
 echo "alias gpu='watch --color -n 1 gpustat -cpu --color'" >> /root/.bashrc
 echo "alias killtrain='bash /root/paddlejob/workspace/env_run/bashScript/killtrain.sh'" >> /root/.bashrc
 
+# 配置 ssh
+sed -i '13i\Port 8000' /etc/ssh/sshd_config
+sed -i '33i\PermitRootLogin yes' /etc/ssh/sshd_config
+service ssh start
+# echo "1" | passwd --stdin  
 
 # 禁止fire输出
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
