@@ -1,384 +1,0 @@
-[2023-10-18 17:59:06,611] torch.distributed.run: [WARNING] 
-[2023-10-18 17:59:06,611] torch.distributed.run: [WARNING] *****************************************
-[2023-10-18 17:59:06,611] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
-[2023-10-18 17:59:06,611] torch.distributed.run: [WARNING] *****************************************
-[2023-10-18 17:59:11,329] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,331] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,332] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,342] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,355] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,447] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,510] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2023-10-18 17:59:11,527] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-/usr/local/python3.11.2/lib/python3.11/site-packages/torchmetrics/utilities/imports.py:24: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
-  _PYTHON_LOWER_3_8 = LooseVersion(_PYTHON_VERSION) < LooseVersion("3.8")
-2023-10-18 17:59:21,916[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-2023-10-18 17:59:21,944[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:21,944[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:21,944[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:21,944[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:21,944[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:21,944[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:21,945[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:21,945[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:21,945[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:21,945[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:21,945 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:21,946 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:21,948 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:21,948] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:21,987 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,072[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-2023-10-18 17:59:22,074[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-2023-10-18 17:59:22,099[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,100[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,101[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:22,101[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,101 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,101[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,101[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,102 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:22,102[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,103 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,104 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:22,104] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:22,104 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,105 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:22,105] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:22,143 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,144 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,152[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-2023-10-18 17:59:22,156[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-2023-10-18 17:59:22,181[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,181[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,181[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,181[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,181[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,181[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,182[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,182[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,182[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:22,182[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,182 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,183 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,184[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,184[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,184[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,184[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,185[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,185[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,185[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,185[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,185 <DEBUG> [toolkit]: seed=10488[0m
-2023-10-18 17:59:22,185[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-[2023-10-18 17:59:22,185] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:22,185[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,186 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,187 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,188 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:22,188] [INFO] [comm.py:637:init_distributed] cdb=None
-[2023-10-18 17:59:22,188] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
-2023-10-18 17:59:22,225 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,227 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,291[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-2023-10-18 17:59:22,318[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,319[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,320[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:22,320[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,320 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,321 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,323 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:22,323] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:22,350[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-2023-10-18 17:59:22,362 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,378[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,378[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:22,379[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,380 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,381 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,382 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:22,382] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:22,421 <DEBUG> __main__: len(tokenizer):64000[0m
-2023-10-18 17:59:22,866[33m <WARNING> Trainer: Can not import wandb, so you shoud not set the `dashboard` to 'wandb'[0m
-/usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py:59: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13
-  import pipes
-2023-10-18 17:59:22,894[32m <INFO> Configuration: 👻 Custom attributes:[0m
-2023-10-18 17:59:22,894[32m <INFO> Configuration:    cache_dir=None[0m
-2023-10-18 17:59:22,894[32m <INFO> Configuration:    model_revision=main[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    use_fast_tokenizer=True[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    use_auth_token=False[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    preprocessing_num_workers=8[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    max_seq_length=2048[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    deepspeed_config=./ds_zero3_offload.hjson[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    generate_config_file=generate_config.json[0m
-2023-10-18 17:59:22,895[32m <INFO> Configuration:    re_gen_num=2[0m
-2023-10-18 17:59:22,896 <DEBUG> Configuration: 💾 Saving training configuration ...[0m
-2023-10-18 17:59:22,897 <DEBUG> Configuration: ✔️  Save configuration file in `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/train_config.json` successfully.[0m
-2023-10-18 17:59:22,898 <DEBUG> [toolkit]: seed=10488[0m
-[2023-10-18 17:59:22,898] [INFO] [comm.py:637:init_distributed] cdb=None
-2023-10-18 17:59:22,937 <DEBUG> __main__: len(tokenizer):64000[0m
-NCCL version 2.18.1+cuda12.1
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,322 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-2023-10-18 17:59:30,324 <DEBUG> __main__: ['data/hot_finetune_data/train/all.json'][0m
-Downloading data files:   0%|          | 0/1 [00:00<?, ?it/s]Downloading data files: 100%|██████████| 1/1 [00:00<00:00, 7667.83it/s]
-Extracting data files:   0%|          | 0/1 [00:00<?, ?it/s]Extracting data files: 100%|██████████| 1/1 [00:00<00:00, 365.77it/s]
-Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 5240 examples [00:00, 34462.24 examples/s]Generating train split: 5962 examples [00:00, 34236.36 examples/s]
-preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):   0%|          | 0/5962 [00:00<?, ? examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:04<00:34, 151.41 examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:04<00:33, 153.57 examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:04<00:34, 150.06 examples/s]preprocessing on dataset (num_proc=8):  50%|█████     | 2981/5962 [00:05<00:03, 776.66 examples/s]preprocessing on dataset (num_proc=8):  63%|██████▎   | 3727/5962 [00:04<00:02, 1002.10 examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:04<00:34, 149.28 examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:05<00:35, 146.31 examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:04<00:34, 150.80 examples/s]preprocessing on dataset (num_proc=8):  13%|█▎        | 746/5962 [00:05<00:35, 148.83 examples/s]preprocessing on dataset (num_proc=8):  38%|███▊      | 2236/5962 [00:05<00:06, 561.73 examples/s]preprocessing on dataset (num_proc=8):  88%|████████▊ | 5217/5962 [00:05<00:00, 1611.48 examples/s]preprocessing on dataset (num_proc=8):  25%|██▌       | 1491/5962 [00:05<00:12, 352.50 examples/s]preprocessing on dataset (num_proc=8):  75%|███████▌  | 4472/5962 [00:05<00:01, 1157.02 examples/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1776.02 examples/s]preprocessing on dataset (num_proc=8):  50%|█████     | 2982/5962 [00:05<00:03, 758.27 examples/s]preprocessing on dataset (num_proc=8):  62%|██████▏   | 3726/5962 [00:05<00:02, 1088.41 examples/s]preprocessing on dataset (num_proc=8):  12%|█▏        | 745/5962 [00:05<00:35, 145.60 examples/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1130.90 examples/s]
-preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1114.22 examples/s]
-preprocessing on dataset (num_proc=8):  88%|████████▊ | 5217/5962 [00:05<00:00, 1329.92 examples/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1949.96 examples/s]preprocessing on dataset (num_proc=8):  75%|███████▌  | 4472/5962 [00:05<00:01, 1285.93 examples/s]preprocessing on dataset (num_proc=8):  38%|███▊      | 2236/5962 [00:05<00:06, 544.61 examples/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1090.69 examples/s]
-Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1094.22 examples/s]
-preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1950.04 examples/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1095.20 examples/s]
-Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]preprocessing on dataset (num_proc=8):  87%|████████▋ | 5216/5962 [00:05<00:00, 1602.12 examples/s]Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]Tokenize input texts:  25%|[31m██▌       [0m| 25/100 [00:00<00:00, 239.03it/s]2023-10-18 18:00:01,200 <DEBUG> TextDataset: ⏳ Loading VALIDATION dataset ...[0m
-2023-10-18 18:00:01,201[32m <INFO> TextDataset: Model max length: 4096[0m
-preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1084.65 examples/s]
-Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1903.76 examples/s]Tokenize input texts:  25%|[31m██▌       [0m| 25/100 [00:00<00:00, 241.80it/s]Tokenize input texts:  25%|[31m██▌       [0m| 25/100 [00:00<00:00, 247.87it/s]Tokenize input texts:  51%|[31m█████     [0m| 51/100 [00:00<00:00, 257.99it/s]Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1071.64 examples/s]
-Tokenize input texts:  25%|[31m██▌       [0m| 25/100 [00:00<00:00, 241.93it/s]Tokenize input texts:  50%|[31m█████     [0m| 50/100 [00:00<00:00, 248.59it/s]Tokenize input texts:  52%|[31m█████▏    [0m| 52/100 [00:00<00:00, 264.37it/s]Tokenize input texts:  77%|[31m███████▋  [0m| 77/100 [00:00<00:00, 236.36it/s]preprocessing on dataset (num_proc=8): 100%|██████████| 5962/5962 [00:05<00:00, 1034.01 examples/s]
-Tokenize input texts:  25%|[31m██▌       [0m| 25/100 [00:00<00:00, 239.74it/s]Tokenize input texts:  50%|[31m█████     [0m| 50/100 [00:00<00:00, 245.46it/s]Tokenize input texts:  75%|[31m███████▌  [0m| 75/100 [00:00<00:00, 237.32it/s]Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 241.14it/s]
-Tokenize input texts:  79%|[31m███████▉  [0m| 79/100 [00:00<00:00, 230.93it/s]Tokenize input texts:  51%|[31m█████     [0m| 51/100 [00:00<00:00, 256.92it/s]Tokenize input texts:  75%|[31m███████▌  [0m| 75/100 [00:00<00:00, 238.03it/s]Tokenize input texts:  99%|[31m█████████▉[0m| 99/100 [00:00<00:00, 222.34it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 236.45it/s]
-Tokenize input texts:  25%|[31m██▌       [0m| 25/100 [00:00<00:00, 242.40it/s]Tokenize input texts:  24%|[31m██▍       [0m| 24/100 [00:00<00:00, 231.23it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 244.27it/s]
-Tokenize input texts:   0%|[31m          [0m| 0/100 [00:00<?, ?it/s]Tokenize input texts:  77%|[31m███████▋  [0m| 77/100 [00:00<00:00, 239.89it/s]Tokenize input texts:  99%|[31m█████████▉[0m| 99/100 [00:00<00:00, 236.40it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 239.60it/s]
-Tokenize input texts:  51%|[31m█████     [0m| 51/100 [00:00<00:00, 254.03it/s]Tokenize input texts:  48%|[31m████▊     [0m| 48/100 [00:00<00:00, 238.09it/s]2023-10-18 18:00:01,732[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-Tokenize input texts:  24%|[31m██▍       [0m| 24/100 [00:00<00:00, 233.50it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 241.66it/s]
-2023-10-18 18:00:01,769[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-2023-10-18 18:00:01,797[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-Tokenize input texts:  73%|[31m███████▎  [0m| 73/100 [00:00<00:00, 246.58it/s]Tokenize input texts:  77%|[31m███████▋  [0m| 77/100 [00:00<00:00, 183.40it/s]Tokenize input texts:  50%|[31m█████     [0m| 50/100 [00:00<00:00, 247.55it/s]2023-10-18 18:00:01,863 <DEBUG> TextDataset: ⌛ Loading VALIDATION data takes 0.66 sec.[0m
-2023-10-18 18:00:01,864[32m <INFO> TextDataset: Total data: 100[0m
-2023-10-18 18:00:01,864[32m <INFO> TextDataset: Max length of input: 1311[0m
-2023-10-18 18:00:01,864[32m <INFO> TextDataset: Max length of label: -1[0m
-2023-10-18 18:00:01,864[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-Tokenize input texts:  98%|[31m█████████▊[0m| 98/100 [00:00<00:00, 232.02it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 235.61it/s]
-2023-10-18 18:00:01,933[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-Tokenize input texts:  75%|[31m███████▌  [0m| 75/100 [00:00<00:00, 246.69it/s]Tokenize input texts:  96%|[31m█████████▌[0m| 96/100 [00:00<00:00, 167.79it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 209.17it/s]
-Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 221.55it/s]Tokenize input texts: 100%|[31m██████████[0m| 100/100 [00:00<00:00, 236.76it/s]
-2023-10-18 18:00:02,107[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-2023-10-18 18:00:02,178[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-2023-10-18 18:00:02,266[33m <WARNING> TextDataset: ⚠️  Fail to load TEST data. The data file path is not specified (received `NoneType`).[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 0: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 6: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 0: Loading model takes 0.00 sec.[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 5: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 6: Loading model takes 0.00 sec.[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 4: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 5: Loading model takes 0.01 sec.[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 2: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 7: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 4: Loading model takes 0.01 sec.[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 2: Loading model takes 0.01 sec.[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 7: Loading model takes 0.01 sec.[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 1: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,272 <DEBUG> __main__: local_rank 3: Construct `from_pretrained` kwargs ...[0m
-2023-10-18 18:00:02,273 <DEBUG> __main__: local_rank 1: Loading model takes 0.01 sec.[0m
-2023-10-18 18:00:02,273 <DEBUG> __main__: local_rank 3: Loading model takes 0.01 sec.[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274[32m <INFO> CheckpointManager: Checkpoints directory: `outputs/hot_finetune_data/baichuan-13b-chat/baseline/10/64/0.0001/10488/checkpoints`[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,274 <DEBUG> CheckpointManager: 🔍 There is no checkpoint. ❗[0m
-2023-10-18 18:00:02,275 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,276 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,276 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,276 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,276 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,276 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,276 <DEBUG> Trainer: Wrapping the model ...[0m
-2023-10-18 18:00:02,277[33m <WARNING> toolkit.training.dataloader: The last batch in training is Not strictly batch gradient descent! Because gradient accumulation is enabled, and the last few micro batches are less than the accumulate step: 1 < 4[0m
-2023-10-18 18:00:02,278 <DEBUG> Trainer: Wrapping the model ...[0m
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-/root/codes/train_llms/toolkit_pkg/toolkit/training/trainer.py:600: ResourceWarning: unclosed file <_io.TextIOWrapper name='./ds_zero3_offload.hjson' mode='r' encoding='UTF-8'>
-  deepspeed_config = hjson.load(open(self.config.deepspeed_config, "r"))
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-[2023-10-18 18:00:11,595] [INFO] [partition_parameters.py:347:__exit__] finished initializing model - num_params = 283, num_elems = 13.26B
-Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.63s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.61s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.62s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.62s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.62s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.64s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:17<00:35, 17.67s/it]Loading checkpoint shards:  33%|███▎      | 1/3 [00:18<00:36, 18.01s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.70s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.71s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.70s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.71s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.73s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.74s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.74s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:35<00:17, 17.88s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.05s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.76s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.07s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.77s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.07s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.78s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.07s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.78s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.07s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.78s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.08s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.78s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.08s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.79s/it]
-Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.04s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:47<00:00, 15.82s/it]
-[2023-10-18 18:00:59,256] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.11.1, git-hash=unknown, git-branch=unknown
-[2023-10-18 18:00:59,275] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Detected CUDA files, patching ldflags
-Emitting ninja build file /root/.cache/torch_extensions/py311_cu121/cpu_adam/build.ninja...
-Building extension module cpu_adam...
-Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
-ninja: no work to do.
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 3.6730833053588867 seconds
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 3.7120444774627686 seconds
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Detected CUDA files, patching ldflags
-Emitting ninja build file /root/.cache/torch_extensions/py311_cu121/cpu_adam/build.ninja...
-Building extension module cpu_adam...
-Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-ninja: no work to do.
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 2.86364483833313 seconds
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 2.7730636596679688 seconds
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 2.8701107501983643 seconds
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Detected CUDA files, patching ldflags
-Emitting ninja build file /root/.cache/torch_extensions/py311_cu121/cpu_adam/build.ninja...
-Building extension module cpu_adam...
-Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
-ninja: no work to do.
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 3.1949753761291504 seconds
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Using /root/.cache/torch_extensions/py311_cu121 as PyTorch extensions root...
-Detected CUDA files, patching ldflags
-Emitting ninja build file /root/.cache/torch_extensions/py311_cu121/cpu_adam/build.ninja...
-Building extension module cpu_adam...
-Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
-ninja: no work to do.
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 3.6751790046691895 seconds
-Loading extension module cpu_adam...
-Time to load cpu_adam op: 3.7157950401306152 seconds
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-[2023-10-18 18:01:09,492] [INFO] [logging.py:96:log_dist] [Rank 0] Using DeepSpeed Optimizer param name adamw as basic optimizer
-[2023-10-18 18:01:09,492] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the basic Optimizer
-[2023-10-18 18:01:09,526] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = DeepSpeedCPUAdam
-[2023-10-18 18:01:09,526] [INFO] [utils.py:56:is_zero_supported_optimizer] Checking ZeRO support for optimizer=DeepSpeedCPUAdam type=<class 'deepspeed.ops.adam.cpu_adam.DeepSpeedCPUAdam'>
-[2023-10-18 18:01:09,526] [INFO] [logging.py:96:log_dist] [Rank 0] Creating fp16 ZeRO stage 3 optimizer, MiCS is enabled False, Hierarchical params gather False
-[2023-10-18 18:01:09,526] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.float16 ZeRO stage 3 optimizer
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-[2023-10-18 18:01:09,851] [INFO] [utils.py:802:see_memory_usage] Stage 3 initialize beginning
-[2023-10-18 18:01:09,852] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 1.22 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:09,853] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 161.08 GB, percent = 10.7%
-[2023-10-18 18:01:09,857] [INFO] [stage3.py:126:__init__] Reduce bucket size 26214400
-[2023-10-18 18:01:09,857] [INFO] [stage3.py:127:__init__] Prefetch bucket size 23592960
-Adam Optimizer #0 is created with AVX512 arithmetic capability.
-Config: alpha=0.000100, betas=(0.900000, 0.999000), weight_decay=0.000000, adam_w=1
-[2023-10-18 18:01:10,140] [INFO] [utils.py:802:see_memory_usage] DeepSpeedZeRoOffload initialize [begin]
-[2023-10-18 18:01:10,141] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:10,141] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 161.18 GB, percent = 10.7%
-Parameter Offload: Total persistent parameters: 414720 in 81 params
-[2023-10-18 18:01:10,508] [INFO] [utils.py:802:see_memory_usage] DeepSpeedZeRoOffload initialize [end]
-[2023-10-18 18:01:10,509] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:10,509] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 161.17 GB, percent = 10.7%
-[2023-10-18 18:01:10,772] [INFO] [utils.py:802:see_memory_usage] Before creating fp16 partitions
-[2023-10-18 18:01:10,774] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:10,774] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 161.17 GB, percent = 10.7%
-[2023-10-18 18:01:15,106] [INFO] [utils.py:802:see_memory_usage] After creating fp16 partitions: 2
-[2023-10-18 18:01:15,107] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:15,108] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 193.94 GB, percent = 12.8%
-[2023-10-18 18:01:15,443] [INFO] [utils.py:802:see_memory_usage] Before creating fp32 partitions
-[2023-10-18 18:01:15,445] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:15,445] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 197.86 GB, percent = 13.1%
-[2023-10-18 18:01:21,988] [INFO] [utils.py:802:see_memory_usage] After creating fp32 partitions
-[2023-10-18 18:01:21,990] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:21,990] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 245.29 GB, percent = 16.2%
-[2023-10-18 18:01:22,446] [INFO] [utils.py:802:see_memory_usage] Before initializing optimizer states
-[2023-10-18 18:01:22,448] [INFO] [utils.py:803:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 1.84 GB         Max_CA 2 GB 
-[2023-10-18 18:01:22,448] [INFO] [utils.py:810:see_memory_usage] CPU Virtual Memory:  used = 248.01 GB, percent = 16.4%
