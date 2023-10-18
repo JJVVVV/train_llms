@@ -1,7 +1,7 @@
 # nohup ./train_pure.sh > /dev/null 2>&1 &
 
 # 训练参数
-pretrained_model_dir=./baichuan-13b-chat
+pretrained_model_dir=../env_run/baichuan-13b-chat
 # deepspeed_config_file=ds_zero2_no_offload.json
 deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
