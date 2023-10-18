@@ -8,6 +8,7 @@ import numpy as np
 import toolkit
 import torch
 import torch.distributed as dist
+import pandas as pd
 from build_dataset import TrainingDataset
 from extral_evaluator import Extral_Evaluator, extra_calculate_metric_callback
 from fire import Fire
@@ -31,6 +32,11 @@ DEFAULT_UNK_TOKEN = "<unk>"
 def eval_callback(all_labels, all_logits, mean_loss):
     metric = rouge(all_logits, all_labels, "zh", ("rouge1", "rouge2", "rougeL"))
     metric.update(bleu(all_logits, all_labels, "zh", ("bleu1", "bleu2", "bleu3", "bleu4")))
+    df = pd.DataFrame.from_dict(dict(labels=all_labels, preds=all_logits))
+    generate_result_path:Path = config.save_dir/"evaluators"/"evaluator"/f"epoch={config.training_runtime['cur_epoch']:03d}_step={config.training_runtime['cur_step']}.json"
+    generate_result_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_json(generate_result_path, force_ascii=False, indent=2, orient='records')
+    metric.round()
     return metric
 
 

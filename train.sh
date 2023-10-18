@@ -48,7 +48,7 @@ gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
 fp16=True
 bf16=False
-epochs=5
+epochs=10
 opt_lr=1e-4
 opt_weight_decay=0
 sch_warmup_ratio_steps=0.03
@@ -103,6 +103,8 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --save_last_ckpt False \
     --generate_config_file "generate_config.json" \
     --re_gen_num 2 \
+    --use_deepspeed_ckpt False \
+    --save_all_ckpts True \
     > training.log 2>&1
 
     # --train_micro_batch_size_per_gpu ${train_micro_batch_size_per_gpu} \

@@ -1,7 +1,12 @@
 # nohup ./train_pure.sh > /dev/null 2>&1 &
 
+
+dataset_name="hot_finetune_data"
+model_type="baichuan-13b-chat"
+model_name="baseline"
+
 # 训练参数
-pretrained_model_dir=../env_run/baichuan-13b-chat
+pretrained_model_dir=/root/paddlejob/workspace/env_run/$model_type
 # deepspeed_config_file=ds_zero2_no_offload.json
 deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
@@ -10,12 +15,12 @@ gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
 fp16=True
 bf16=False
-epochs=5
+epochs=10
 opt_lr=1e-4
 opt_weight_decay=0
 sch_warmup_ratio_steps=0.03
-train_file_path=./data/hot_finetune_data/train
-val_file_path=./data/hot_finetune_data/val/all.json
+train_file_path=./data/$dataset_name/train
+val_file_path=./data/$dataset_name/val/all.json
 
 # 推理参数
 max_new_tokens=1024
@@ -27,6 +32,9 @@ num_beams=1
 repetition_penalty=1.1
 
 torchrun --nnodes 1 --nproc_per_node 8 train.py \
+    --model_name $model_name \
+    --model_type $model_type \
+    --dataset_name $dataset_name \
     --cache_dir "None" \
     --model_revision "main" \
     --use_fast_tokenizer "True" \
@@ -61,8 +69,10 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --do_sample $do_sample \
     --num_beams $num_beams \
     --repetition_penalty $repetition_penalty \
-    --save_dir "outputs" \
+    --save_dir None \
     --cut_input_from_output True \
     --generate_config_file "generate_config.json" \
     --re_gen_num 2 \
+    --use_deepspeed_ckpt False \
+    --save_all_ckpts True \
     > training.log 2>&1

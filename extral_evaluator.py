@@ -2,6 +2,7 @@ import json
 from typing import Callable
 
 import numpy as np
+import pandas as pd
 import torch
 import torch.distributed as dist
 from toolkit.config import TrainConfig
@@ -13,8 +14,14 @@ from torch.utils.data import Dataset
 from tqdm.auto import tqdm
 
 
-def extra_calculate_metric_callback(all_labels, all_logits):
-    return self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)
+def extra_calculate_metric_callback(all_labels, all_logits, config:TrainConfig):
+    df = pd.DataFrame.from_dict(dict(labels=all_labels, preds=all_logits))
+    generate_result_path = config.save_dir/"evaluators"/"extal_evaluator"/f"epoch={config.training_runtime['cur_epoch']:03d}_step={config.training_runtime['cur_step']}.json"
+    generate_result_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_json(generate_result_path, force_ascii=False, indent=2, orient='records')
+    metric = self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)
+    metric.round()
+    return metric
 
 
 class Extral_Evaluator(Evaluator):
@@ -91,4 +98,4 @@ class Extral_Evaluator(Evaluator):
             all_labels = sum(labels_gather_list, [])
             all_logits = sum(logits_gather_list, [])
 
-        return self.calculate_metric_callback(all_labels, all_logits)
+        return self.calculate_metric_callback(all_labels, all_logits, config=self.config)
