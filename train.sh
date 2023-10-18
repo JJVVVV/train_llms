@@ -11,9 +11,6 @@
 pip config unset global.index-url
 cd toolkit_pkg && pip install --editable . > ../pip.log 2>&1 && cd -
 pip install transformers_stream_generator
-pip install accelerate
-pip install nltk
-
 
 
 # 下载模型
@@ -21,25 +18,21 @@ wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz
 tar -zxf baichuan-13b-chat.tar.gz
 
 # 定义快捷命令
-echo "export LANG=en_US.UTF-8" >> /root/.bashrc
 echo "alias log='tail -f /root/paddlejob/workspace/env_run/training.log'" >> /root/.bashrc
 echo "alias report='cat /root/paddlejob/workspace/env_run/outputs/report.log'" >> /root/.bashrc
 echo "alias all_log='more /root/paddlejob/workspace/env_run/training.log'" >> /root/.bashrc
-echo "alias tps='ps aux|grep train.py'" >> /root/.bashrc
 echo "alias ws='cd /root/paddlejob/workspace/env_run/'" >> /root/.bashrc
-echo "alias k9='kill -9'" >> /root/.bashrc
-echo "alias gs='gpustat -cpu'" >> /root/.bashrc
-echo "alias gpu='watch --color -n 1 gpustat -cpu --color'" >> /root/.bashrc
 echo "alias killtrain='bash /root/paddlejob/workspace/env_run/bashScript/killtrain.sh'" >> /root/.bashrc
 
 # 配置 ssh
-sed -i '13i\Port 8000' /etc/ssh/sshd_config
-sed -i '33i\PermitRootLogin yes' /etc/ssh/sshd_config
 service ssh start
 # echo "1" | passwd --stdin  
 
 # 禁止fire输出
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
+
+# 创建运行时输出目录
+mkdir ~/running
 
 # 训练参数
 pretrained_model_dir=./baichuan-13b-chat
