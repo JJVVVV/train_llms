@@ -23,7 +23,7 @@ echo "alias report='cat /root/paddlejob/workspace/env_run/outputs/report.log'" >
 echo "alias all_log='more /root/paddlejob/workspace/env_run/training.log'" >> /root/.bashrc
 echo "alias ws='cd /root/paddlejob/workspace/env_run/'" >> /root/.bashrc
 echo "alias killtrain='bash /root/paddlejob/workspace/env_run/bashScript/killtrain.sh'" >> /root/.bashrc
-echo "alias update='cd ~/codes && find train_llms -maxdepth 1 -mindepth 1 ! -name runs ! -name outputs -exec rm -rf {} + && tar xzf train_llms.tar.gz && cd -'" >> /root/.bashrc
+echo "alias update='# mv ~/codes/train_llms/train_llms.tar.gz ~/codes && cd ~/codes && find train_llms -maxdepth 1 -mindepth 1 ! -name runs ! -name outputs -exec rm -rf {} + && tar xzf train_llms.tar.gz && cd -'" >> /root/.bashrc
 
 # 简短的bash提示符
 echo "PS1=\"\[\e[36;1m\]\u\[\e[33;1m\]@\[\e[33;1m\]a100 \[\e[32;1m\]\W \[\e[31;1m\]$ \[\e[0m\]\"" >> /root/.bashrc
