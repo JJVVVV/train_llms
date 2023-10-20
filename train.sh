@@ -11,11 +11,9 @@
 pip config unset global.index-url
 cd toolkit_pkg && pip install --editable . > ../pip.log 2>&1 && cd -
 pip install transformers_stream_generator
+# pip install nltk
+# pip install accelerate
 
-
-# 下载模型
-wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz
-tar -zxf baichuan-13b-chat.tar.gz
 
 # 定义快捷命令
 echo "alias log='tail -f /root/paddlejob/workspace/env_run/training.log'" >> /root/.bashrc
@@ -35,6 +33,11 @@ service ssh start
 # 禁止fire输出
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
 
+# 下载模型
+wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz > training.log 2>&1
+tar -zxvf baichuan-13b-chat.tar.gz > training.log 2>&1
+
+# 命名
 dataset_name="hot_finetune_data"
 model_type="baichuan-13b-chat"
 model_name="baseline"
