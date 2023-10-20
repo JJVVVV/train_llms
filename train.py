@@ -5,14 +5,11 @@ from pathlib import Path
 import deepspeed
 import hjson
 import numpy as np
+import pandas as pd
 import toolkit
 import torch
 import torch.distributed as dist
-import pandas as pd
-from build_dataset import TrainingDataset
-from extral_evaluator import Extral_Evaluator, extra_calculate_metric_callback
 from fire import Fire
-from load_data_fn import load_data_fn
 from toolkit import getLogger
 from toolkit.enums import Split
 from toolkit.metric import MetricDict, bleu, rouge
@@ -20,6 +17,10 @@ from toolkit.nlp import NLPTrainingConfig, TextDataset
 from toolkit.training import Trainer, initialize
 from transformers import CONFIG_MAPPING, AutoConfig, AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer
 from transformers.integrations import HfDeepSpeedConfig
+
+from build_dataset import TrainingDataset
+from extral_evaluator import Extral_Evaluator, extra_calculate_metric_callback
+from load_data_fn import load_data_fn
 
 IGNORE_INDEX = -100
 DEFAULT_PAD_TOKEN = "[PAD]"
@@ -33,9 +34,14 @@ def eval_callback(all_labels, all_logits, mean_loss):
     metric = rouge(all_logits, all_labels, "zh", ("rouge1", "rouge2", "rougeL"))
     metric.update(bleu(all_logits, all_labels, "zh", ("bleu1", "bleu2", "bleu3", "bleu4")))
     df = pd.DataFrame.from_dict(dict(labels=all_labels, preds=all_logits))
-    generate_result_path:Path = config.save_dir/"evaluators"/"evaluator"/f"epoch={config.training_runtime['cur_epoch']:03d}_step={config.training_runtime['cur_step']}.json"
+    generate_result_path: Path = (
+        config.save_dir
+        / "evaluators"
+        / "evaluator"
+        / f"epoch={config.training_runtime['cur_epoch']:03d}_step={config.training_runtime['cur_step']}.json"
+    )
     generate_result_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_json(generate_result_path, force_ascii=False, indent=2, orient='records')
+    df.to_json(generate_result_path, force_ascii=False, indent=2, orient="records")
     metric.round()
     return metric
 
@@ -69,7 +75,10 @@ def load_tokenizer() -> PreTrainedTokenizer:
 def load_dataset(tokenizer: PreTrainedTokenizer) -> tuple:
     # * Load training data, development data and test data
     path = Path(config.train_file_path)
-    files = [os.path.join(path, file.name) for file in path.glob("*.json")]
+    if path.is_dir():
+        files = [os.path.join(path, file.name) for file in path.glob("*.json")]
+    else:
+        files = path
     logger.debug(str(files))
     train_dataset = TrainingDataset(
         Split.TRAINING, config, files, tokenizer, config.max_seq_length, preprocessing_num_workers=config.preprocessing_num_workers

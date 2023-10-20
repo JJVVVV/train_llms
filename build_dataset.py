@@ -121,21 +121,6 @@ class TrainingDataset(Dataset):
             processed_dataset.set_format("torch")
             all_datasets.append(processed_dataset["train"])
         self.all_datasets = concatenate_datasets(all_datasets)
-        # # todo 不应该在这里计算
-        # # calculate total steps of training
-        # if split == Split.TRAINING:
-        #     config.sch_total_num_steps = (
-        #         ceil(len(self.all_datasets) / config.train_batch_size) * config.epochs
-        #     )
-        #     if config.sch_warmup_ratio_steps != -1:
-        #         if config.sch_warmup_num_steps == -1:
-        #             config.sch_warmup_num_steps = round(
-        #                 config.sch_total_num_steps * config.sch_warmup_ratio_steps
-        #             )
-        #         else:
-        #             raise ValueError(
-        #                 "❌ `sch_warmup_num_steps` and `sch_warmup_ratio_steps` cannot be set simultaneously."
-        #             )
 
     def __getitem__(self, index) -> dict:
         return self.all_datasets[index]

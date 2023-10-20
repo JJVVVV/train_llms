@@ -9,7 +9,7 @@
 
 # 安装依赖
 pip config unset global.index-url
-cd toolkit_pkg && pip install --editable . > ../pip.log 2>&1 && cd -
+cd toolkit_pkg && pip install --editable . > ../training.log 2>&1 && cd -
 pip install transformers_stream_generator
 # pip install nltk
 # pip install accelerate
@@ -35,6 +35,7 @@ sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fi
 
 # 下载模型
 wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz > training.log 2>&1
+# wget 10.104.216.16:8202/baichuan2-13b-chat.tar > training.log 2>&1
 tar -zxvf baichuan-13b-chat.tar.gz > training.log 2>&1
 
 # 命名
@@ -56,7 +57,7 @@ epochs=10
 opt_lr=1e-4
 opt_weight_decay=0
 sch_warmup_ratio_steps=0.03
-train_file_path=./data/$dataset_name/train
+train_file_path=./data/$dataset_name/train/all_v2.json
 val_file_path=./data/$dataset_name/val/all.json
 
 # 推理参数
