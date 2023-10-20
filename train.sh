@@ -35,8 +35,9 @@ service ssh start
 # 禁止fire输出
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
 
-# 创建运行时输出目录
-mkdir ~/running
+dataset_name="hot_finetune_data"
+model_type="baichuan-13b-chat"
+model_name="baseline"
 
 # 训练参数
 pretrained_model_dir=./baichuan-13b-chat
@@ -52,8 +53,8 @@ epochs=10
 opt_lr=1e-4
 opt_weight_decay=0
 sch_warmup_ratio_steps=0.03
-train_file_path=./data/hot_finetune_data/train
-val_file_path=./data/hot_finetune_data/val/all.json
+train_file_path=./data/$dataset_name/train
+val_file_path=./data/$dataset_name/val/all.json
 
 # 推理参数
 max_new_tokens=1024
@@ -65,6 +66,9 @@ num_beams=1
 repetition_penalty=1.1
 
 torchrun --nnodes 1 --nproc_per_node 8 train.py \
+    --model_name $model_name \
+    --model_type $model_type \
+    --dataset_name $dataset_name \
     --cache_dir "None" \
     --model_revision "main" \
     --use_fast_tokenizer "True" \
@@ -82,7 +86,7 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --train_batch_size ${train_batch_size} \
     --infer_batch_size ${infer_batch_size} \
     --gradient_accumulation_steps ${gradient_accumulation_steps} \
-    --seed $RANDOM \
+    --seed 0 \
     --fp16 $fp16 \
     --bf16 $bf16 \
     --epochs $epochs \
@@ -99,13 +103,15 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --do_sample $do_sample \
     --num_beams $num_beams \
     --repetition_penalty $repetition_penalty \
-    --save_dir "outputs" \
-    --save_last_ckpt False \
+    --save_dir None \
+    --cut_input_from_output True \
     --generate_config_file "generate_config.json" \
     --re_gen_num 2 \
     --use_deepspeed_ckpt False \
     --save_all_ckpts True \
     > training.log 2>&1
+
+    # --seed $RANDOM \
 
     # --train_micro_batch_size_per_gpu ${train_micro_batch_size_per_gpu} \
     # --gradient_accumulation_steps ${gradient_accumulation_steps} \
