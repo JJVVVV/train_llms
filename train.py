@@ -174,7 +174,7 @@ def main() -> None:
         dataset_train=train_dataset,
         dataset_val=val_dataset,
         dataset_test=test_dataset,
-        calculate_metric_callback=eval_callback,
+        calculate_metric_callback=None,
         tokenizer=tokenizer,
         extral_evaluators=[(Extral_Evaluator, extra_calculate_metric_callback)],
     )

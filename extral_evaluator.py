@@ -7,7 +7,7 @@ import torch
 import torch.distributed as dist
 from toolkit.config import TrainConfig
 from toolkit.enums import Split
-from toolkit.metric import MetricDict, self_bleu
+from toolkit.metric import MetricDict, self_bleu, rouge, bleu
 from toolkit.training import Evaluator, get_dataloader
 from toolkit.training.evaluator import logger
 from torch.utils.data import Dataset
@@ -19,8 +19,9 @@ def extra_calculate_metric_callback(all_labels, all_logits, config:TrainConfig):
     generate_result_path = config.save_dir/"evaluators"/"extal_evaluator"/f"epoch={config.training_runtime['cur_epoch']:03d}_step={config.training_runtime['cur_step']}.json"
     generate_result_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_json(generate_result_path, force_ascii=False, indent=2, orient='records')
-    metric = self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)
-    metric.round()
+    metric = rouge(all_logits, all_labels, "zh", ("rouge1", "rouge2", "rougeL")).round()*100
+    metric.update(self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1).round()*100)
+    # metric.update((1-self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)).round()*100)
     return metric
 
 
