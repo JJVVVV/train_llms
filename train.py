@@ -78,7 +78,7 @@ def load_dataset(tokenizer: PreTrainedTokenizer) -> tuple:
     if path.is_dir():
         files = [os.path.join(path, file.name) for file in path.glob("*.json")]
     else:
-        files = path
+        files = str(path)
     logger.debug(str(files))
     train_dataset = TrainingDataset(
         Split.TRAINING, config, files, tokenizer, config.max_seq_length, preprocessing_num_workers=config.preprocessing_num_workers

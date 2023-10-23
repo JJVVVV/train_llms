@@ -2,7 +2,7 @@
 set -ex
 
 cur_time=`date  +"%Y%m%d%H%M"`
-job_name=baseline0-baichuan1-13b-chat_${cur_time}
+job_name="baichuan1-13b-chat-${cur_time}"
 
 ## k8s cluster
 group_name="kg-40g-1-yq01-k8s-gpu-a100-8-0"
