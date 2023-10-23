@@ -38,11 +38,30 @@ dataset_name="hot_finetune_data"
 model_type="baichuan2-13b-chat"
 model_name="baseline"
 
+
+if [ -d "baichuan2-13b-chat" ]; then
+    echo "目录存在"
+else
+    echo "目录不存在"
+fi
+
 # 下载模型
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
-    wget 10.104.216.16:8202/baichuan2-13b-chat.tar > training.log 2>&1
+    if [ -d "baichuan2-13b-chat" ]; then
+        echo "Already downloaded."
+    else
+        echo "downloading..."
+        wget 10.104.216.16:8202/baichuan2-13b-chat.tar > training.log 2>&1
+        tar -xvf baichuan2-13b-chat.tar > training.log 2>&1
+    fi
 else
-    wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz > training.log 2>&1
+    if [ -d "baichuan-13b-chat" ]; then
+        echo "Already downloaded."
+    else
+        echo "downloading..."
+        wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz > training.log 2>&1
+        tar -zxvf baichuan-13b-chat.tar.gz > training.log 2>&1
+    fi
 fi
 
 # 训练参数
@@ -84,7 +103,7 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --model_revision "main" \
     --use_fast_tokenizer "True" \
     --use_auth_token "False" \
-    --torch_dtype "float16" \
+    --torch_dtype "auto" \
     --preprocessing_num_workers 8 \
     --max_seq_length 2048 \
     --parallel_mode "deepspeed" \
