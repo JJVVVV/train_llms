@@ -2,7 +2,7 @@
 set -ex
 
 cur_time=`date  +"%Y%m%d%H%M"`
-job_name="baichuan1-13b-chat-${cur_time}"
+job_name="training-${cur_time}"
 
 ## k8s cluster
 group_name="kg-40g-1-yq01-k8s-gpu-a100-8-0"
@@ -10,7 +10,7 @@ group_name="kg-40g-1-yq01-k8s-gpu-a100-8-0"
 job_version="paddle-fluid-custom"
 
 # image_addr="iregistry.baidu-int.com/huzhe01/huzhe01-transformers-pdc:deepspeed"
-image_addr="iregistry.baidu-int.com/jjw/dev"
+image_addr="iregistry.baidu-int.com/jjw/dev:cu11.8"
 
 start_cmd="sh train.sh"
 # start_cmd="sh run_rm.sh"

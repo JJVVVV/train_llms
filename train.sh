@@ -33,29 +33,36 @@ service ssh start
 # 禁止fire输出
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
 
-# 下载模型
-wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz > training.log 2>&1
-# wget 10.104.216.16:8202/baichuan2-13b-chat.tar > training.log 2>&1
-tar -zxvf baichuan-13b-chat.tar.gz > training.log 2>&1
-
 # 命名
 dataset_name="hot_finetune_data"
-model_type="baichuan-13b-chat"
+model_type="baichuan2-13b-chat"
 model_name="baseline"
 
+# 下载模型
+if [ "$model_type" = "baichuan2-13b-chat" ]; then
+    wget 10.104.216.16:8202/baichuan2-13b-chat.tar > training.log 2>&1
+else
+    wget 10.104.216.16:8201/baichuan-13b-chat.tar.gz > training.log 2>&1
+fi
+
 # 训练参数
-pretrained_model_dir=./baichuan-13b-chat
+pretrained_model_dir=./$model_type
 # deepspeed_config_file=ds_zero2_no_offload.json
 deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
 infer_batch_size=64
 gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
-fp16=True
-bf16=False
+if [ "$model_type" = "baichuan2-13b-chat" ]; then
+    fp16=False
+    bf16=True
+else
+    fp16=True
+    bf16=False
+fi
 epochs=10
 opt_lr=1e-4
-opt_weight_decay=0
+opt_weight_decay=0.01
 sch_warmup_ratio_steps=0.03
 train_file_path=./data/$dataset_name/train/all_v2.json
 val_file_path=./data/$dataset_name/val/all.json
