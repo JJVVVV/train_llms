@@ -39,11 +39,6 @@ model_type="baichuan2-13b-chat"
 model_name="baseline"
 
 
-if [ -d "baichuan2-13b-chat" ]; then
-    echo "目录存在"
-else
-    echo "目录不存在"
-fi
 
 # 下载模型
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
