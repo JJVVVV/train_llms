@@ -14,11 +14,16 @@ train_batch_size=64
 infer_batch_size=64
 gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
-fp16=True
-bf16=False
+if [ "$model_type" = "baichuan2-13b-chat" ]; then
+    fp16=False
+    bf16=True
+else
+    fp16=True
+    bf16=False
+fi
 epochs=10
 opt_lr=1e-4
-opt_weight_decay=0
+opt_weight_decay=0.01
 sch_warmup_ratio_steps=0.03
 train_file_path=./data/$dataset_name/train/all_v2.json
 val_file_path=./data/$dataset_name/val/all.json
@@ -40,7 +45,7 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --model_revision "main" \
     --use_fast_tokenizer "True" \
     --use_auth_token "False" \
-    --torch_dtype "float16" \
+    --torch_dtype "auto" \
     --preprocessing_num_workers 8 \
     --max_seq_length 2048 \
     --parallel_mode "deepspeed" \
