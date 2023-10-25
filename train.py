@@ -21,6 +21,7 @@ from transformers.integrations import HfDeepSpeedConfig
 from build_dataset import TrainingDataset
 from extral_evaluator import Extral_Evaluator, extra_calculate_metric_callback
 from load_data_fn import load_data_fn
+from model.baichuan_mod import BaichuanForCausalLM_shift
 
 IGNORE_INDEX = -100
 DEFAULT_PAD_TOKEN = "[PAD]"
@@ -97,7 +98,10 @@ def load_model(tokenizer):
     start = time.time()
 
     # * define model class
-    model_class = AutoModelForCausalLM
+    if "baseline" in config.model_name:
+        model_class = AutoModelForCausalLM
+    elif "shift" in config.model_name:
+        model_class = BaichuanForCausalLM_shift
 
     # * define from_pretrained kwargs
     from_pretrained_kwargs = None
@@ -151,6 +155,8 @@ def load_model(tokenizer):
             low_cpu_mem_usage=False,
             trust_remote_code=True,
         )
+        if model_class is BaichuanForCausalLM_shift:
+            from_pretrained_kwargs["alpha"] = config.alpha
 
     end = time.time()
 
