@@ -41,7 +41,7 @@ num_beams=1
 repetition_penalty=1.1
 
 torchrun --nnodes 1 --nproc_per_node 8 train.py \
-    --alpha 0.8 \
+    --alpha 0.2 \
     --model_name $model_name \
     --model_type $model_type \
     --dataset_name $dataset_name \

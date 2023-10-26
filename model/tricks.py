@@ -23,6 +23,8 @@ def shift_embeddings(input_embs: torch.Tensor, alpha: float = 0.2) -> torch.Tens
     with torch.no_grad():
         r = torch.sqrt(input_embs.mul(input_embs).sum(dim=-1, keepdim=True)) * alpha
         return input_embs + generate_spherical_vector(input_embs.size(), input_embs.device, input_embs.dtype, r)
+    # ! maybe bug? 
+    # return input_embs + generate_spherical_vector(input_embs.size(), input_embs.device, input_embs.dtype, r)
 
 
 # def shift_embeddings(input_embs: torch.Tensor, alpha: float = 0.2) -> torch.Tensor:

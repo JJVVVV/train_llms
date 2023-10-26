@@ -29,8 +29,6 @@ class BaichuanForCausalLM_shift(BaichuanForCausalLM):
     ) -> Tuple | CausalLMOutputWithPast:
         inputs_embs = self.get_input_embeddings()(input_ids)
         inputs_embs = shift_embeddings(inputs_embs, self.alpha)
-        # inputs_embs = inputs_embs.to(torch.float16)
-        # print(inputs_embs.dtype)
         return super().forward(
             None, attention_mask, past_key_values, inputs_embs, labels, use_cache, output_attentions, output_hidden_states, return_dict, **kwargs
         )
