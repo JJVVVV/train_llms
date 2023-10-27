@@ -8,9 +8,10 @@ import datasets
 import torch
 import transformers
 from datasets import concatenate_datasets, load_dataset
-from ngram import get_cn_char_unigram
 from toolkit.enums import Split
 from torch.utils.data import Dataset
+
+from ngram import get_cn_char_unigram
 
 IGNORE_INDEX = -100
 
@@ -22,11 +23,12 @@ PROMPT_TEMPLATE = (
 )
 
 
-def prompt_transfer(input, output):
+def prompt_transfer(instruction, input, output):
     target_length = len(get_cn_char_unigram(output))
     tmp = round(target_length / 50)
     target_length = tmp * 50
-    instruction = "给定文本：\n" + input + "\n生成" + str(target_length) + "字左右视频文案。"
+    if not instruction:
+        instruction = "给定文本：\n" + input.strip() + "\n生成" + str(target_length) + "字左右视频文案。"
     prompt = PROMPT_TEMPLATE.format_map({"instruction": instruction})
     return prompt
 
@@ -67,7 +69,7 @@ class TrainingDataset(Dataset):
                 # if input is not None and input !="":
                 #     instruction = instruction+'\n'+input
                 # source = prompt.format_map({'instruction':instruction})
-                source = prompt_transfer(input, output)
+                source = prompt_transfer(instruction, input, output)
                 target = f"{output}{tokenizer.eos_token}"
 
                 sources.append(source)

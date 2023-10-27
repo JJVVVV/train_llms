@@ -37,9 +37,10 @@ mkdir /root/.ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqTCJ0yfYWAq1i/C
 sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fire/core.py
 
 # 命名
+mix_ratio=1
 dataset_name="hot_finetune_data"
-model_type="baichuan2-13b-chat"
-model_name="baseline"
+model_type="baichuan-13b-chat"
+model_name="mix_general_data_ratio=$mix_ratio"
 
 # 下载模型
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
@@ -84,8 +85,9 @@ else
 fi
 epochs=10
 opt_weight_decay=0.01
-train_file_path=./data/$dataset_name/train/all_v2.json
+train_file_path=./data/$dataset_name/train/mixed_ratio=$mix_ratio.jsonl
 val_file_path=./data/$dataset_name/val/all.json
+
 
 # 推理参数
 max_new_tokens=1024
