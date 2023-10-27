@@ -95,10 +95,10 @@ def load_model(tokenizer):
     start = time.time()
 
     # * define model class
-    if "baseline" in config.model_name:
-        model_class = AutoModelForCausalLM
-    elif "shift" in config.model_name:
+    if "shift" in config.model_name:
         model_class = BaichuanForCausalLM_shift
+    else:
+        model_class = AutoModelForCausalLM
 
     # * define from_pretrained kwargs
     from_pretrained_kwargs = None

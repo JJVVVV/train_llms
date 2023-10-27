@@ -24,7 +24,7 @@ def load_data_fn(data_file_path: Path | str, model_type: str, tokenizer: PreTrai
     labels = []
     for idx, row in df.iterrows():
         # Single
-        a_sample = PairedText(prompt_transfer(row["input"], row["output"]))
+        a_sample = PairedText(prompt_transfer(row["instruction"], row["input"], row["output"]))
 
         # label
         a_label = row["output"]
