@@ -22,23 +22,23 @@
         }
     },
  
-    "scheduler": {
-        "type": "WarmupLR",
-        "params": {
-            "warmup_min_lr": "auto",
-            "warmup_max_lr": "auto",
-            "warmup_num_steps": "auto"
-        }
-    },
-    //  "scheduler": {                                                                         
-    //     "type": "WarmupDecayLR",                                                           
-    //     "params": {                                                                        
-    //         "warmup_min_lr": "auto",                                                       
-    //         "warmup_max_lr": "auto",                                                       
-    //         "warmup_num_steps": "auto",                                                    
-    //         "total_num_steps":"auto"                                                       
-    //     }                                                                                  
-    // },                                                                                     
+    // "scheduler": {
+    //     "type": "WarmupLR",
+    //     "params": {
+    //         "warmup_min_lr": "auto",
+    //         "warmup_max_lr": "auto",
+    //         "warmup_num_steps": "auto"
+    //     }
+    // },
+     "scheduler": {                                                                         
+        "type": "WarmupDecayLR",                                                           
+        "params": {                                                                        
+            "warmup_min_lr": "auto",                                                       
+            "warmup_max_lr": "auto",                                                       
+            "warmup_num_steps": "auto",                                                    
+            "total_num_steps":"auto"                                                       
+        }                                                                                  
+    },                                                                                     
       
     "zero_optimization": {
         "stage": 3,

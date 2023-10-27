@@ -25,7 +25,7 @@ def extra_calculate_metric_callback(all_labels, all_logits, config: TrainConfig)
     generate_result_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_json(generate_result_path, force_ascii=False, indent=2, orient="records")
     metric = (rouge(all_logits, all_labels, "zh", ("rouge1", "rouge2", "rougeL")) * 100).round(2)
-    metric.update((self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1) * 100).round(2))
+    metric.update(((1 - self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)) * 100).round(2))
     # metric.update((1-self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)).round()*100)
     return metric
 

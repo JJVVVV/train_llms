@@ -27,6 +27,8 @@ echo "alias update='# mv ~/codes/train_llms/train_llms.tar.gz ~/codes && cd ~/co
 echo "PS1=\"\[\e[36;1m\]\u\[\e[33;1m\]@\[\e[33;1m\]a100 \[\e[32;1m\]\W \[\e[31;1m\]$ \[\e[0m\]\"" >> /root/.bashrc
 
 # 配置 ssh
+sed -i '13i\Port 8000' /etc/ssh/sshd_config
+sed -i '33i\PermitRootLogin yes' /etc/ssh/sshd_config
 service ssh start
 # echo "1" | passwd --stdin  
 
@@ -62,7 +64,6 @@ fi
 # 训练参数
 pretrained_model_dir=./$model_type
 # deepspeed_config_file=ds_zero2_no_offload.json
-deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
 infer_batch_size=64
 gradient_accumulation_steps=4
@@ -71,15 +72,19 @@ if [ "$model_type" = "baichuan2-13b-chat" ]; then
     fp16=False
     bf16=True
     torch_dtype=bfloat16
+    deepspeed_config_file=./ds_zero3_offload2.hjson
+    opt_lr="2e-4"
+    sch_warmup_ratio_steps=0.2
 else
     fp16=True
     bf16=False
     torch_dtype=float16
+    deepspeed_config_file=./ds_zero3_offload.hjson
+    opt_lr="1e-4"
+    sch_warmup_ratio_steps=0.03
 fi
 epochs=10
-opt_lr=1e-4
 opt_weight_decay=0.01
-sch_warmup_ratio_steps=0.03
 train_file_path=./data/$dataset_name/train/all_v2.json
 val_file_path=./data/$dataset_name/val/all.json
 
