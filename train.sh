@@ -70,9 +70,11 @@ gradient_accumulation_steps=4
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
     fp16=False
     bf16=True
+    torch_dtype=bfloat16
 else
     fp16=True
     bf16=False
+    torch_dtype=float16
 fi
 epochs=10
 opt_lr=1e-4
@@ -98,7 +100,7 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --model_revision "main" \
     --use_fast_tokenizer "True" \
     --use_auth_token "False" \
-    --torch_dtype "auto" \
+    --torch_dtype $torch_dtype \
     --preprocessing_num_workers 8 \
     --max_seq_length 2048 \
     --parallel_mode "deepspeed" \
@@ -140,12 +142,5 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
 
     # --train_micro_batch_size_per_gpu ${train_micro_batch_size_per_gpu} \
     # --gradient_accumulation_steps ${gradient_accumulation_steps} \
-    # --save_strategy steps \
-    # --save_steps 5 \
-    # --save_total_limit 5 \
-    # --evaluation_strategy steps \
-    # --eval_steps 1000000 \
     # --lr_scheduler_type cosine \
     # --gradient_checkpointing \
-    # --ddp_find_unused_parameters False \
-    # --max_seq_length 2048 \
