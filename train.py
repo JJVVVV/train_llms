@@ -2,8 +2,6 @@ import os
 import time
 from pathlib import Path
 
-import deepspeed
-import hjson
 import numpy as np
 import pandas as pd
 import toolkit
@@ -16,7 +14,6 @@ from toolkit.metric import MetricDict, bleu, rouge
 from toolkit.nlp import NLPTrainingConfig, TextDataset
 from toolkit.training import Trainer, initialize
 from transformers import CONFIG_MAPPING, AutoConfig, AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer
-from transformers.integrations import HfDeepSpeedConfig
 
 from build_dataset import TrainingDataset
 from extral_evaluator import Extral_Evaluator, extra_calculate_metric_callback
