@@ -30,6 +30,7 @@ echo "PS1=\"\[\e[36;1m\]\u\[\e[33;1m\]@\[\e[33;1m\]a100 \[\e[32;1m\]\W \[\e[31;1
 sed -i '13i\Port 8000' /etc/ssh/sshd_config
 sed -i '33i\PermitRootLogin yes' /etc/ssh/sshd_config
 service ssh start
+mkdir /root/.ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqTCJ0yfYWAq1i/CHtPCePRGvg0k/UA5ixnjMw1qkJMg3wngn+Bpaqptz1ACn6cX6TKFjF1439J/Nr4c0yvgwUis+3gZlmiz1LKseD4/C68wt63H/j6Je1sd5miiIAbPorJ9F9/wbn9NSP/I+e6GN0sV2UOYqsto2t9/+dbrrMKGBTU9NlwCqqjd8FYSC868PrVXTnKL2Ht/FQMbxTW2xK+2OKwV/8024M6Q9B79XhNEaffruj3n7gYqDeWlZYdcEwsICux8t8nMkmL1Pn+WRqZaqPvE+L6baTEW7a3n89llNPV/tbhMrtCTmbyFo+9hfwDlAyBrqvwn/nNQO5QcTp baidu" >> /root/.ssh/authorized_keys
 # echo "1" | passwd --stdin  
 
 # 禁止fire输出
@@ -39,8 +40,6 @@ sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fi
 dataset_name="hot_finetune_data"
 model_type="baichuan2-13b-chat"
 model_name="baseline"
-
-
 
 # 下载模型
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
