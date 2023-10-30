@@ -24,8 +24,8 @@ def extra_calculate_metric_callback(all_labels, all_logits, config: TrainConfig)
     )
     generate_result_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_json(generate_result_path, force_ascii=False, indent=2, orient="records")
-    metric = (rouge(all_logits, all_labels, "zh", ("rouge1", "rouge2", "rougeL")) * 100).round(2)
-    metric.update(((1 - self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)) * 100).round(2))
+    metric = (rouge([logits_regen[0] for logits_regen in all_logits], all_labels, "zh", ("rougeL")) * 100).round(2)
+    metric.update(((1 - self_bleu(all_logits, "zh", ("bleu4"), smoothing_level=1)) * 100).round(2))
     # metric.update((1-self_bleu(all_logits, "zh", ("bleu1", "bleu2", "bleu3", "bleu4"), smoothing_level=1)).round()*100)
     return metric
 
@@ -65,28 +65,55 @@ class Extral_Evaluator(Evaluator):
             self.model.cuda()
         self.model.eval()
 
-        all_regenerate = []
-        for _ in range(self.config.re_gen_num):
+        if "sample_context" in self.config.model_name:
             all_labels = []
             all_logits = []
-            for batch in tqdm(self.dataloader, desc=self.split.name, colour="BLUE", unit="batch", smoothing=0.9):
-                with torch.no_grad():
-                    labels = batch.pop("labels")
-                    custom_inputs = batch.pop("custom_inputs", dict())
-                    if self.config.gpu:
-                        batch = {key: value.cuda() for key, value in batch.items()}
-                    outputs = self.model.generate(**batch, **custom_inputs, **self.extral_args_evaluation, **self.generate_config)
-                    if self.config.cut_input_from_output:
-                        texts = []
-                        for idx, output in enumerate(outputs):
-                            texts.append(self.tokenizer.decode(output[batch["input_ids"][idx].size(0) :], skip_special_tokens=True))
-                    else:
-                        texts = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
-                    all_labels.extend(labels)
-                    all_logits.extend(texts)
-            all_regenerate.append(all_logits)
-        all_regenerate = np.array(all_regenerate)
-        all_logits = all_regenerate.transpose((1, 0)).tolist()
+            for _batch in tqdm(self.dataloader, desc=self.split.name, colour="BLUE", unit="batch", smoothing=0.9):
+                labels = _batch.pop("labels")
+                # batch: (batch_size, re_gen_num, seq_len)
+                texts_regen = []
+                for i in range(self.config.re_gen_num):
+                    batch = {key: value[:, i] for key, value in _batch.items()}
+                    with torch.no_grad():
+                        custom_inputs = batch.pop("custom_inputs", dict())
+                        if self.config.gpu:
+                            batch = {key: value.cuda() for key, value in batch.items()}
+                        outputs = self.model.generate(**batch, **custom_inputs, **self.extral_args_evaluation, **self.generate_config)
+                        if self.config.cut_input_from_output:
+                            texts = []
+                            for idx, output in enumerate(outputs):
+                                texts.append(self.tokenizer.decode(output[batch["input_ids"][idx].size(0) :], skip_special_tokens=True))
+                        else:
+                            texts = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+                    texts_regen.append(texts)
+                texts_regen = np.array(texts_regen).transpose((1, 0))  # (batch_size, re_gen_num)
+                all_labels.extend(labels)
+                all_logits.append(texts_regen)
+            all_logits = np.concatenate(all_logits, axis=0).tolist()
+
+        else:
+            all_regenerate = []
+            for _ in range(self.config.re_gen_num):
+                all_labels = []
+                all_logits = []
+                for batch in tqdm(self.dataloader, desc=self.split.name, colour="BLUE", unit="batch", smoothing=0.9):
+                    with torch.no_grad():
+                        labels = batch.pop("labels")
+                        custom_inputs = batch.pop("custom_inputs", dict())
+                        if self.config.gpu:
+                            batch = {key: value.cuda() for key, value in batch.items()}
+                        outputs = self.model.generate(**batch, **custom_inputs, **self.extral_args_evaluation, **self.generate_config)
+                        if self.config.cut_input_from_output:
+                            texts = []
+                            for idx, output in enumerate(outputs):
+                                texts.append(self.tokenizer.decode(output[batch["input_ids"][idx].size(0) :], skip_special_tokens=True))
+                        else:
+                            texts = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+                        all_labels.extend(labels)
+                        all_logits.extend(texts)
+                all_regenerate.append(all_logits)
+            all_regenerate = np.array(all_regenerate)
+            all_logits = all_regenerate.transpose((1, 0)).tolist()
 
         self.model.train()
 

@@ -82,9 +82,9 @@ def load_dataset(tokenizer: PreTrainedTokenizer) -> tuple:
         Split.TRAINING, config, files, tokenizer, config.max_seq_length, preprocessing_num_workers=config.preprocessing_num_workers
     )
 
-    val_dataset = TextDataset.from_file(config.val_file_path, tokenizer, split=Split.VALIDATION, configs=config, load_data_fn=load_data_fn)
+    val_dataset = TextDataset.from_file(config.val_file_path, tokenizer, split=Split.VALIDATION, configs=config, load_data_fn=load_data_fn, train_config=config)
 
-    test_dataset = TextDataset.from_file(config.test_file_path, tokenizer, split=Split.TEST, configs=config, load_data_fn=load_data_fn)
+    test_dataset = TextDataset.from_file(config.test_file_path, tokenizer, split=Split.TEST, configs=config, load_data_fn=load_data_fn,  train_config=config)
     if dist.is_initialized():
         dist.barrier()
     return train_dataset, val_dataset, test_dataset

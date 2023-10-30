@@ -60,6 +60,7 @@ class TrainingDataset(Dataset):
     ) -> None:
         super().__init__()
         self.tokenizer = tokenizer
+        self.config = config
 
         def tokenization(examples):
             sources = []
@@ -128,6 +129,8 @@ class TrainingDataset(Dataset):
         return self.all_datasets[index]
 
     def __len__(self):
+        if "debug" in self.config.model_name:
+            return self.config.train_batch_size
         return len(self.all_datasets)
 
     @property

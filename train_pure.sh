@@ -5,14 +5,15 @@
 dataset_name="hot_finetune_data"
 model_type="baichuan-13b-chat"
 # model_name="baseline-data_v2"
-model_name="shift-data_V2"
+# model_name="shift-data_V2"
+model_name="sample_context-data_v2_debug"
 
 # 训练参数
 pretrained_model_dir='/root/paddlejob/workspace/env_run/baichuan-13b-chat'
 # deepspeed_config_file=ds_zero2_no_offload.json
 deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
-infer_batch_size=64
+infer_batch_size=16
 gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
