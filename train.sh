@@ -98,6 +98,7 @@ do_sample=True
 num_beams=1
 repetition_penalty=1.1
 
+# --master_port=25678
 torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --model_name $model_name \
     --model_type $model_type \
