@@ -65,7 +65,7 @@ fi
 pretrained_model_dir=./$model_type
 # deepspeed_config_file=ds_zero2_no_offload.json
 train_batch_size=64
-infer_batch_size=64
+infer_batch_size=16
 gradient_accumulation_steps=4
 # train_micro_batch_size_per_gpu=2
 if [ "$model_type" = "baichuan2-13b-chat" ]; then

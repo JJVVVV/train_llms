@@ -8,14 +8,15 @@ import torch.distributed as dist
 from toolkit.config import TrainConfig
 from toolkit.enums import Split
 from toolkit.metric import MetricDict, bleu, rouge, self_bleu
+from toolkit.nlp import TextDataset
 from toolkit.training import Evaluator, get_dataloader
 from toolkit.training.evaluator import logger
 from torch.utils.data import Dataset
 from tqdm.auto import tqdm
 
 
-def extra_calculate_metric_callback(all_labels, all_logits, config: TrainConfig):
-    df = pd.DataFrame.from_dict(dict(labels=all_labels, preds=all_logits))
+def extra_calculate_metric_callback(all_labels, all_logits, config: TrainConfig, dataset: TextDataset):
+    df = pd.DataFrame.from_dict(dict(labels=all_labels, inputs=[a_sample.to_list() for a_sample in dataset.texts_input], preds=all_logits))
     generate_result_path = (
         config.save_dir
         / "evaluators"
@@ -131,4 +132,4 @@ class Extral_Evaluator(Evaluator):
             all_labels = sum(labels_gather_list, [])
             all_logits = sum(logits_gather_list, [])
 
-        return self.calculate_metric_callback(all_labels, all_logits, config=self.config)
+        return self.calculate_metric_callback(all_labels, all_logits, config=self.config, dataset=self.dataset)
