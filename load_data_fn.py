@@ -26,7 +26,7 @@ def load_data_fn(data_file_path: Path | str, model_type: str, tokenizer: PreTrai
     if "debug" in kwargs and kwargs["debug"]:
         df = df[: kwargs["part"]]
     if "debug" in config.model_name:
-        df = df[:16]
+        df = df[: config.infer_batch_size]
     inputs = []
     labels = []
     for idx, row in df.iterrows():
