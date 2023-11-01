@@ -16,7 +16,9 @@ from tqdm.auto import tqdm
 
 
 def extra_calculate_metric_callback(all_labels, all_logits, config: TrainConfig, dataset: TextDataset):
-    df = pd.DataFrame.from_dict(dict(inputs=[a_sample.to_list() for a_sample in dataset.texts_input], preds=all_logits, labels=all_labels))
+    df = pd.DataFrame.from_dict(
+        dict(inputs=[a_sample.to_list() for a_sample in dataset.texts_input[: len(all_labels)]], preds=all_logits, labels=all_labels)
+    )
     generate_result_path = (
         config.save_dir
         / "evaluators"
