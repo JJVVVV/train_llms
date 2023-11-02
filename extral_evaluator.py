@@ -71,7 +71,7 @@ class Extral_Evaluator(Evaluator):
         if "sample_context" in self.config.model_name:
             all_labels = []
             all_logits = []
-            for _batch in tqdm(self.dataloader, desc=self.split.name, colour="BLUE", unit="batch", smoothing=0.9):
+            for _batch in tqdm(self.dataloader, desc=self.split.name.capitalize(), colour="BLUE", unit="batch", smoothing=0.9):
                 labels = _batch.pop("labels")
                 # batch: (batch_size, re_gen_num, seq_len)
                 texts_regen = []
