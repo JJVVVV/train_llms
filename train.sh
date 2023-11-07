@@ -87,7 +87,7 @@ fi
 epochs=10
 opt_weight_decay=0.01
 # train_file_path=./data/$dataset_name/train/mixed_ratio=$mix_ratio.jsonl
-train_file_path=./data/hot_finetune_data/train/aug_data.json
+train_file_path=./data/hot_finetune_data/train/aug_data.jsonl
 val_file_path=./data/$dataset_name/val/all.json
 
 

@@ -2,16 +2,15 @@
 # `tmux new-session -d -s train_task 'bash ./train_pure.sh > /dev/null 2>&1'`
 
 # 命名
+# mix_ratio=0.5
 dataset_name="hot_finetune_data"
 model_type="baichuan-13b-chat"
-# model_name="baseline-data_v2"
-# model_name="shift-data_V2"
-model_name="sample_context-data_v2_"
+# model_name="mix_general_data_ratio=$mix_ratio"
+model_name="sample_context_with_aug"
 
 # 训练参数
 pretrained_model_dir='/root/paddlejob/workspace/env_run/baichuan-13b-chat'
 # deepspeed_config_file=ds_zero2_no_offload.json
-deepspeed_config_file=./ds_zero3_offload.hjson
 train_batch_size=64
 infer_batch_size=16
 gradient_accumulation_steps=4
@@ -20,17 +19,23 @@ if [ "$model_type" = "baichuan2-13b-chat" ]; then
     fp16=False
     bf16=True
     torch_dtype=bfloat16
+    deepspeed_config_file=./ds_zero3_offload2.hjson
+    opt_lr="2e-4"
+    sch_warmup_ratio_steps=0.2
 else
     fp16=True
     bf16=False
     torch_dtype=float16
+    deepspeed_config_file=./ds_zero3_offload.hjson
+    opt_lr="1e-4"
+    sch_warmup_ratio_steps=0.03
 fi
 epochs=10
-opt_lr=1e-4
 opt_weight_decay=0.01
-sch_warmup_ratio_steps=0.03
-train_file_path=./data/$dataset_name/train/all_v2.json
+# train_file_path=./data/$dataset_name/train/mixed_ratio=$mix_ratio.jsonl
+train_file_path=./data/hot_finetune_data/train/with_aug.jsonl
 val_file_path=./data/$dataset_name/val/all.json
+
 
 # 推理参数
 max_new_tokens=1024
@@ -41,8 +46,8 @@ do_sample=True
 num_beams=1
 repetition_penalty=1.1
 
+# --master_port=25678
 torchrun --nnodes 1 --nproc_per_node 8 train.py \
-    --alpha 0.2 \
     --model_name $model_name \
     --model_type $model_type \
     --dataset_name $dataset_name \
