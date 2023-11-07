@@ -128,7 +128,7 @@ torchrun --nnodes 1 --nproc_per_node 8 train.py \
     --sch_warmup_ratio_steps $sch_warmup_ratio_steps \
     --opt_weight_decay $opt_weight_decay \
     --ddp_timeout 30000 \
-    --logging_steps 5 \
+    --logging_steps 1 \
     --padding_side "left" \
     --max_new_tokens $max_new_tokens \
     --temperature $temperature \
