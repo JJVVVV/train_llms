@@ -41,7 +41,7 @@ sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fi
 dataset_name="hot_finetune_data"
 model_type="baichuan-13b-chat"
 # model_name="mix_general_data_ratio=$mix_ratio"
-model_name="sample_context_with_aug"
+model_name="sample_context_with_aug_mixed_ratio=9"
 
 # 下载模型
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
@@ -87,7 +87,7 @@ fi
 epochs=10
 opt_weight_decay=0.01
 # train_file_path=./data/$dataset_name/train/mixed_ratio=$mix_ratio.jsonl
-train_file_path=./data/hot_finetune_data/train/aug_data.jsonl
+train_file_path=./data/hot_finetune_data/train/with_aug_mixed_ratio=9.jsonl
 val_file_path=./data/$dataset_name/val/all.json
 
 
