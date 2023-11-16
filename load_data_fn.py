@@ -32,15 +32,15 @@ def load_data_fn(data_file_path: Path | str, model_type: str, tokenizer: PreTrai
     for idx, row in df.iterrows():
         # Single
         if "sample_context" in config.model_name:
-            a_sample = [prompt_transfer(row["instruction"], row["input"], row["output"])]
+            a_sample = [prompt_transfer(row["instruction"], row["input"], row["output"], model_type)]
             contexts = row["input"].split("\n")
             # print(len(contexts))
             for i in range(config.re_gen_num - 1):
                 sampled_input = random.sample(contexts, k=random.randint(max(1, ceil(len(contexts) / 2)), max(1, len(contexts) - 1)))
-                a_sample.append(prompt_transfer(row["instruction"], "\n".join(sampled_input), row["output"]))
+                a_sample.append(prompt_transfer(row["instruction"], "\n".join(sampled_input), row["output"], model_type))
             a_sample = PairedText(a_sample)
         else:
-            a_sample = PairedText(prompt_transfer(row["instruction"], row["input"], row["output"]))
+            a_sample = PairedText(prompt_transfer(row["instruction"], row["input"], row["output"], model_type))
 
         # label
         a_label = row["output"]

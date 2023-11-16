@@ -21,15 +21,25 @@ PROMPT_TEMPLATE = (
     "Write a response that appropriately completes the request.\n\n"
     "### Instruction:\n{instruction}\n\n### Response: "
 )
+sp_token_map = {
+    "baichuan2-13b-chat": {"assistant_token_id": "<reserved_107>", "user_token_id": "<reserved_106>"},
+    "baichuan-13b-chat": {"assistant_token_id": "<reserved_102>", "user_token_id": "<reserved_103>"},
+}
 
 
-def prompt_transfer(instruction, input, output):
+def prompt_transfer(instruction, input, output, model_type):
     target_length = len(get_cn_char_unigram(output))
     tmp = round(target_length / 50)
     target_length = tmp * 50
     if not instruction:
         instruction = "给定文本：\n" + input.strip() + "\n生成" + str(target_length) + "字左右视频文案。"
-    prompt = PROMPT_TEMPLATE.format_map({"instruction": instruction})
+
+    # if model_type == "baichuan2-13b-chat":
+    #     prompt = sp_token_map["user_token_id"] + instruction + sp_token_map["assistant_token_id"]
+    # else:
+    #     prompt = PROMPT_TEMPLATE.format_map({"instruction": instruction})
+    prompt = sp_token_map[model_type]["user_token_id"] + instruction + sp_token_map[model_type]["assistant_token_id"]
+
     return prompt
 
 
@@ -70,7 +80,7 @@ class TrainingDataset(Dataset):
                 # if input is not None and input !="":
                 #     instruction = instruction+'\n'+input
                 # source = prompt.format_map({'instruction':instruction})
-                source = prompt_transfer(instruction, input, output)
+                source = prompt_transfer(instruction, input, output, self.config.model_type)
                 target = f"{output}{tokenizer.eos_token}"
 
                 sources.append(source)

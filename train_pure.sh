@@ -1,5 +1,5 @@
 # nohup ./train_pure.sh > /dev/null 2>&1 &
-# `tmux new-session -d -s train_task 'bash ./train_pure.sh > /dev/null 2>&1'`
+# tmux new-session -d -s train_task 'bash ./train_pure.sh > /dev/null 2>&1'
 
 # 命名
 # mix_ratio=0.5

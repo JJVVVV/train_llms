@@ -41,7 +41,8 @@ sed -i '166,168 s/^/# /' /usr/local/python3.11.2/lib/python3.11/site-packages/fi
 dataset_name="hot_finetune_data"
 model_type="baichuan-13b-chat"
 # model_name="mix_general_data_ratio=$mix_ratio"
-model_name="sample_context_with_aug_mixed_ratio=9"
+# model_name="sample_context_with_aug_mixed_ratio=5"
+model_name="baseline"
 
 # 下载模型
 if [ "$model_type" = "baichuan2-13b-chat" ]; then
@@ -74,8 +75,8 @@ if [ "$model_type" = "baichuan2-13b-chat" ]; then
     bf16=True
     torch_dtype=bfloat16
     deepspeed_config_file=./ds_zero3_offload2.hjson
-    opt_lr="2e-4"
-    sch_warmup_ratio_steps=0.2
+    opt_lr="1e-4"
+    sch_warmup_ratio_steps=0.03
 else
     fp16=True
     bf16=False
@@ -87,7 +88,8 @@ fi
 epochs=10
 opt_weight_decay=0.01
 # train_file_path=./data/$dataset_name/train/mixed_ratio=$mix_ratio.jsonl
-train_file_path=./data/hot_finetune_data/train/with_aug_mixed_ratio=9.jsonl
+# train_file_path=./data/hot_finetune_data/train/with_aug_mixed_ratio=5.jsonl
+train_file_path=./data/$dataset_name/train/all_v2.json
 val_file_path=./data/$dataset_name/val/all.json
 
 
@@ -101,7 +103,7 @@ num_beams=1
 repetition_penalty=1.1
 
 # --master_port=25678
-torchrun --nnodes 1 --nproc_per_node 8 train.py \
+torchrun --nnodes 1 --nproc_per_node 8 --master_port=25678 train.py \
     --model_name $model_name \
     --model_type $model_type \
     --dataset_name $dataset_name \
